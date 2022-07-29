@@ -1,16 +1,10 @@
 import React from "react";
 import Product from "./Product/Product";
 import { Grid } from "@material-ui/core";
-import { ShortTextSharp } from "@material-ui/icons";
+// import { ShortTextSharp } from "@material-ui/icons";
 
 
-const products = [
-  {id:1, name:'shoes', description:'running shoes', price: '$6', image: "../assets/images/runningshoes.jpg" },
-  {id:2, name:'Macbook', description:'Apple Macbook', price: '$90', image: "../assets/images/runningshoes.jpg"},
-  {id:3, name:'Headphones', description:'Sony Heads', price: '$1000', image: "../assets/images/headphones.jpg"},
-]
-
-const Products = () => {
+const Products = ({products}) => {
   return (
   <main>
     <Grid container justifyContent="center" spacing={4} >
