@@ -1,11 +1,11 @@
-import React from 'react';
-import {useState,useEffect} from 'react';
-import Navbar from './components/Navbar/Navbar';
-import Products from './components/Products';
-import {commerce} from './lib/commerce';
-import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-import {orange, red} from '@material-ui/core/colors';
-import 'fontsource-roboto';
+import React from "react";
+import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar/Navbar";
+import Products from "./components/Products";
+import { commerce } from "./lib/commerce";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { orange, red } from "@material-ui/core/colors";
+import "fontsource-roboto";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -18,36 +18,34 @@ const App = () => {
       },
       secondary: {
         main: red[400],
-      }
-    }
+      },
+    },
   });
 
-  const fetchProducts = async() => {
+  const fetchProducts = async () => {
     const { data } = await commerce.products.list();
     setProducts(data);
-  }
-  const fetchCart = async() =>{
-    const { cart } = await commerce.cart.retrieve()
+  };
+  const fetchCart = async () => {
+    const { cart } = await commerce.cart.retrieve();
     setCart(cart);
-  }
+  };
 
   useEffect(() => {
     fetchProducts();
     fetchCart();
   }, []);
 
-
   // console.log(products);
   console.log(cart);
   return (
     <div>
       <ThemeProvider theme={theme}>
-       <Navbar />      
-       <Products products={products}/>
+        <Navbar />
+        <Products products={products} />
       </ThemeProvider>
-
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
