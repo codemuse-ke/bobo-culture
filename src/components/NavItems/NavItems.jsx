@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Button } from "@material-ui/core";
 
-const pages = ["Category", "Products", "Pricing", "Search"];
-// const settings = ["Account", "Logout"];
+const pages = ["Category", "Products", "Pricing"];
 const Menubar = () => {
   return (
     <>

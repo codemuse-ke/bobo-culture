@@ -12,6 +12,7 @@ import { ShoppingCart } from "@material-ui/icons";
 import LoginIcon from "@mui/icons-material/Login";
 import useStyles from "./styles";
 import Menubar from "../NavItems/NavItems";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
   const classes = useStyles();
@@ -38,14 +39,15 @@ const Navbar = () => {
             Bobo Collection Store
           </Typography>
           <Menubar />
-          <Button
+          <SearchBar />
+          {/* <Button
             startIcon={<LoginIcon />}
             size="large"
             variant="outlined"
             color="inherit"
           >
             Login
-          </Button>
+          </Button> */}
           <div className={classes.grow} />
           <div className={classes.button}>
             <IconButton aria-label="show cart items" color="inherit">
