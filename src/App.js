@@ -1,7 +1,5 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import Navbar from "./components/Navbar/Navbar";
-import Products from "./components/Products";
+import { Products, Navbar } from "./components";
 import { commerce } from "./lib/commerce";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { orange, red } from "@material-ui/core/colors";
