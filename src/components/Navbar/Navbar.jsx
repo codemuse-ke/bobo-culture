@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -16,9 +15,10 @@ import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
   const classes = useStyles();
+
   return (
     <>
-      <AppBar position="static" className={classes.appBar} color="inherit">
+      <AppBar position="fixed" className={classes.appBar} color="inherit">
         <Toolbar disableGutters>
           <IconButton
             edge="start"
@@ -30,32 +30,32 @@ const Navbar = () => {
             <MenuOutlinedIcon />
           </IconButton>
           <Typography
-            variant="h6"
+            variant="h5"
             className={classes.title}
             component="div"
             color="inherit"
             sx={{ flexGrow: 1 }}
           >
-            Bobo Collection Store
+            BoCollection
           </Typography>
           <Menubar />
           <SearchBar />
-          {/* <Button
-            startIcon={<LoginIcon />}
-            size="large"
-            variant="outlined"
-            color="inherit"
-          >
-            Login
-          </Button> */}
           <div className={classes.grow} />
           <div className={classes.button}>
             <IconButton aria-label="show cart items" color="inherit">
-              <Badge badgeContent={2} color="secondary">
+              <Badge badgeContent={6} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>
           </div>
+          <Button
+            endIcon={<LoginIcon />}
+            size="large"
+            variant="text"
+            color="inherit"
+          >
+            Sign In
+          </Button>
         </Toolbar>
       </AppBar>
     </>
