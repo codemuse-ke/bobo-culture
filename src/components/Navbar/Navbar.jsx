@@ -13,7 +13,7 @@ import useStyles from "./styles";
 import Menubar from "../NavItems/NavItems";
 import SearchBar from "../SearchBar/SearchBar";
 
-const Navbar = () => {
+const Navbar = ({ totalItems }) => {
   const classes = useStyles();
 
   return (
@@ -43,7 +43,7 @@ const Navbar = () => {
           <div className={classes.grow} />
           <div className={classes.button}>
             <IconButton aria-label="show cart items" color="inherit">
-              <Badge badgeContent={6} color="secondary">
+              <Badge badgeContent={totalItems} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>
