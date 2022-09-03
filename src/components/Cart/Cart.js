@@ -1,13 +1,14 @@
 import { Typography, Container, Button, Grid } from "@material-ui/core";
 import useStyles from "./styles";
+import CardItem from "./CartItem/CartItem";
 
 const Cart = ({ cart }) => {
   const classes = useStyles();
   //checks for empty or filled cart
-  const isEmpty = !cart.line_items?.length;
+  // const isEmpty = !cart.line_items?.length;
   const GetEmptyCart = () => (
     <Typography variant="subtitle1">
-      The Cart is Empty! Start adding some items
+      The Cart is Empty!
     </Typography>
   );
   const FilledCart = () => (
@@ -16,7 +17,7 @@ const Cart = ({ cart }) => {
         {cart.line_items.map((item) => (
           //extra small devices >>fullwidth, small devices= 4 out of 12 spaces
           <Grid item xs={12} sm={4} key={item.id}>
-            <div>{item.name}</div>
+            <CardItem item={item} />
           </Grid>
         ))}
       </Grid>
@@ -45,12 +46,14 @@ const Cart = ({ cart }) => {
       </div>
     </>
   );
-  // if (!cart.line_items) return "...loading";
+  if (!cart.line_items) return "...loading";
   return (
     <Container>
       <div className={classes.toolbar} />
-      <Typography className={classes.title}>cart</Typography>
-      {isEmpty ? <GetEmptyCart /> : <FilledCart />}
+      <Typography variant="h5" className={classes.title}>
+        Shopping Cart
+      </Typography>
+      {!cart.line_items?.length ? <GetEmptyCart /> : <FilledCart />}
     </Container>
   );
 };
