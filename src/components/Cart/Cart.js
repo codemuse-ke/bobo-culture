@@ -18,6 +18,7 @@ const Cart = ({ cart }) => {
           //extra small devices >>fullwidth, small devices= 4 out of 12 spaces
           <Grid item xs={12} sm={4} key={item.id}>
             <CardItem item={item} />
+            {/* <div>{item.name}</div> */}
           </Grid>
         ))}
       </Grid>

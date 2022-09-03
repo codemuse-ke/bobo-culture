@@ -41,7 +41,7 @@ const App = () => {
   }, []);
 
   console.log(cart);
-  // console.log(cart.total_items);
+  console.log(cart.total_items);
   return (
     <div>
       <ThemeProvider theme={theme}>
