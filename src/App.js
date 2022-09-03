@@ -40,7 +40,7 @@ const App = () => {
     fetchCart();
   }, []);
 
-  // console.log(cart);
+  console.log(cart);
   // console.log(cart.total_items);
   return (
     <div>
