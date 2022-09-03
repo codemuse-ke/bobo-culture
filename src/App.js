@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
-import { Products, Navbar } from "./components";
+import { Products, Navbar, Cart } from "./components";
 import { commerce } from "./lib/commerce";
-// import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-// import { orange, red } from "@material-ui/core/colors";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { orange, red } from "@material-ui/core/colors";
 import "fontsource-roboto";
 
 const App = () => {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState({ line_items: [] });
 
-  // const theme = createMuiTheme({
-  //   palette: {
-  //     primary: {
-  //       main: orange[400],
-  //     },
-  //     secondary: {
-  //       main: red[400],
-  //     },
-  //   },
-  // });
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: orange[400],
+      },
+      secondary: {
+        main: red[400],
+      },
+    },
+  });
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
@@ -26,12 +26,8 @@ const App = () => {
   };
 
   const fetchCart = async () => {
-    try {
-      const cart = await commerce.cart.retrieve();
-      setCart(cart);
-    } catch (err) {
-      console.log(err);
-    }
+    const cart = await commerce.cart.retrieve();
+    setCart(cart);
   };
 
   const handleAddToCart = async (productId, quantity) => {
@@ -43,14 +39,16 @@ const App = () => {
     fetchProducts();
     fetchCart();
   }, []);
-  console.log(cart);
-  console.log(cart.total_items);
+
+  // console.log(cart);
+  // console.log(cart.total_items);
   return (
     <div>
-      {/* <ThemeProvider theme={theme}> */}
-      <Navbar totalItems={cart.total_items} />
-      <Products products={products} onAddToCart={handleAddToCart} />
-      {/* </ThemeProvider> */}
+      <ThemeProvider theme={theme}>
+        <Navbar totalItems={cart?.total_items} />
+        <Products products={products} onAddToCart={handleAddToCart} />
+        <Cart cart={cart} />
+      </ThemeProvider>
     </div>
   );
 };
