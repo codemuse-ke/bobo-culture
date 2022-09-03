@@ -24,7 +24,7 @@ const Navbar = ({ totalItems }) => {
             edge="start"
             color="inherit"
             aria-label="menu"
-            size="large"
+            size="medium"
             sx={{ mr: 2 }}
           >
             <MenuOutlinedIcon />
