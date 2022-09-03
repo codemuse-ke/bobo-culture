@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Products, Navbar, Cart } from "./components";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { commerce } from "./lib/commerce";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { orange, red } from "@material-ui/core/colors";
@@ -46,8 +47,17 @@ const App = () => {
     <div>
       <ThemeProvider theme={theme}>
         <Navbar totalItems={cart?.total_items} />
-        <Products products={products} onAddToCart={handleAddToCart} />
-        <Cart cart={cart} />
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Products products={products} onAddToCart={handleAddToCart} />
+              }
+            />
+            <Route path="/cart" element={<Cart cart={cart} />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </div>
   );
