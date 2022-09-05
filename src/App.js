@@ -3,6 +3,7 @@ import { Products, Navbar, Cart } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { commerce } from "./lib/commerce";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
 import { orange, red } from "@material-ui/core/colors";
 import "fontsource-roboto";
 
@@ -46,7 +47,7 @@ const App = () => {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Navbar totalItems={cart?.total_items} />
+        {/* <Navbar totalItems={cart?.total_items} /> */}
         <Router>
           <Routes>
             <Route
@@ -56,11 +57,18 @@ const App = () => {
               }
             />
             <Route path="/cart" element={<Cart cart={cart} />} />
+            <Route
+              path="*"
+              element={
+                <Typography variant="h2" align="center">
+                  404 Not found!
+                </Typography>
+              }
+            />
           </Routes>
         </Router>
       </ThemeProvider>
     </div>
   );
 };
-
 export default App;

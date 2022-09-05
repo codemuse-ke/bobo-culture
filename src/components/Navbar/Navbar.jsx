@@ -12,9 +12,13 @@ import LoginIcon from "@mui/icons-material/Login";
 import useStyles from "./styles";
 import Menubar from "../NavItems/NavItems";
 import SearchBar from "../SearchBar/SearchBar";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = ({ totalItems }) => {
   const classes = useStyles();
+  const location = useLocation();
+
+  // if(location.pathname === "/")
 
   return (
     <>
@@ -30,9 +34,11 @@ const Navbar = ({ totalItems }) => {
             <MenuOutlinedIcon />
           </IconButton>
           <Typography
+            component={Link}
+            to="/"
             variant="h5"
             className={classes.title}
-            component="div"
+            // component="div"
             color="inherit"
             sx={{ flexGrow: 1 }}
           >
@@ -41,13 +47,21 @@ const Navbar = ({ totalItems }) => {
           <Menubar />
           <SearchBar />
           <div className={classes.grow} />
-          <div className={classes.button}>
-            <IconButton aria-label="show cart items" color="inherit">
-              <Badge badgeContent={totalItems} color="secondary">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-          </div>
+          {location.pathname === "/" && (
+            <div className={classes.button}>
+              {/* <Link to="/cart">go to cart</Link> */}
+              <IconButton
+                component={Link}
+                to="/cart"
+                aria-label="show cart items"
+                color="inherit"
+              >
+                <Badge badgeContent={totalItems} color="secondary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </div>
+          )}
           <Button
             endIcon={<LoginIcon />}
             size="large"
