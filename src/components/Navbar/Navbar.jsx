@@ -10,7 +10,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { ShoppingCart } from "@material-ui/icons";
 import LoginIcon from "@mui/icons-material/Login";
 import useStyles from "./styles";
-import Menubar from "../NavItems/NavItems";
+import Menubar from "./NavItems/NavItems";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link, useLocation } from "react-router-dom";
 
@@ -42,7 +42,7 @@ const Navbar = ({ totalItems }) => {
             color="inherit"
             sx={{ flexGrow: 1 }}
           >
-            BoCollection
+            BoboCulture
           </Typography>
           <Menubar />
           <SearchBar />
