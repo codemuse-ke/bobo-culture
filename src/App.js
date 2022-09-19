@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Products, Navbar, Cart } from "./components";
+import { Products, Navbar, Cart, Checkout } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { commerce } from "./lib/commerce";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
@@ -78,6 +78,7 @@ const App = () => {
                 />
               }
             />
+            <Route path="/checkout" element={<Checkout cart={cart} />} />
             <Route
               path="*"
               element={
