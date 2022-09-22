@@ -59,7 +59,7 @@ const AddressForm = ({ checkoutToken }) => {
       { country, region }
     );
     setShippingOptions(options);
-    shippingOption(options[0].id);
+    setShippingOption(options[0].id);
   };
 
   useEffect(() => {
