@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { Products, Navbar, Cart, Checkout } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
