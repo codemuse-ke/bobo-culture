@@ -71,7 +71,7 @@ const PaymentForm = ({
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
-            <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+            <form onSubmit ={(e) => handleSubmit(e, elements, stripe)}>
               <CardElement />
               <br />
               <br />

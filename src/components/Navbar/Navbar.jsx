@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -38,7 +39,6 @@ const Navbar = ({ totalItems }) => {
             to="/"
             variant="h5"
             className={classes.title}
-            // component="div"
             color="inherit"
             sx={{ flexGrow: 1 }}
           >

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Products, Navbar, Cart, Checkout } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { commerce } from "./lib/commerce";
@@ -79,7 +79,7 @@ const App = () => {
     <div>
       <ThemeProvider theme={theme}>
         <Router>
-          <Navbar totalItems={cart?.total_items} />
+          {/* <Navbar totalItems={cart?.total_items} /> */}
           <Routes>
             <Route
               path="/"

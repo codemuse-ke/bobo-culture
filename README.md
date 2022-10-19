@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+Initial setup
+1. Install and set up React
+The simplest and quickest way to get started with a React project is to use the create-react-app command. To create a project, run:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+yarn create-react-app your-project-name
+# OR
+npx create-react-app your-project-name
 
-## Available Scripts
+Change directory into your project folder:
 
-In the project directory, you can run:
+cd your-project-name
+Change directory into your project folder:
 
-### `npm start`
+cd your-project-name
+2. Store the public key in an environment variable file
+Create a .env to store the public key.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+touch .env
+Open up your the .env file and add your Chec public key:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Public key from Chec's demo merchant account
+REACT_APP_CHEC_PUBLIC_KEY=pk_184625ed86f36703d7d233bcf6d519a4f9398f20048ec
+3. Start your local HTTP server and run your development environment
+yarn start
+# OR
+npm start
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Add Commerce.js to the application
 
-### `npm run build`
+1. Install Commerce.js
+In order to communicate with the Chec API and fetch data from the backend, install the Commerce.js SDK:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+yarn add @chec/commerce.js
+# OR
+npm install @chec/commerce.js
+2. Create a Commerce.js instance
+The Commerce.js SDK comes packed with all the frontend oriented functionality to get a customer-facing web-store up and running. To use the SDK, import the module in a folder called lib so you have access to the Commerce object instance throughout your application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go ahead and do that right now! In your src directory, create a new folder called lib, create a file commerce.js and copy and paste the below code in it. A lib folder in a project typically stores files that abstracts functions or some form of data.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+// src/lib/commerce.js
 
-### `npm run eject`
+import Commerce from '@chec/commerce.js';
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+const checAPIKey = process.env.REACT_APP_CHEC_PUBLIC_KEY;
+const devEnvironment = process.env.NODE_ENV === 'development';
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const commerceConfig = {
+  axiosConfig: {
+    headers: {
+      'X-Chec-Agent': 'commerce.js/v2',
+      'Chec-Version': '2021-09-29',
+    },
+  },
+};
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+if (devEnvironment && !checAPIKey) {
+  throw Error('Your public API key must be provided as an environment variable named NEXT_PUBLIC_CHEC_PUBLIC_KEY. Obtain your Chec public key by logging into your Chec account and navigate to Setup > Developer, or can be obtained with the Chec CLI via with the command chec whoami');
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+export default new Commerce(
+  checAPIKey,
+  devEnvironment,
+  commerceConfig,
+);
+Above, you've imported the Commerce object, then exported the instance with your Chec API key provided via an environment variable. The public key is needed to give you access to data via the Chec API.
 
-## Learn More
+A good idea is to throw throw an error if the public key isn't available, since it will probably make your application unusable.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. The commerce object
+In order to have access to your commerce instance exported in /lib/Commerce.js, import it to every component needing to make requests to the Chec API:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+import { commerce } from './lib/commerce';
+The commerce object will then be available to make Commerce.js requests with.
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
